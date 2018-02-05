@@ -1,0 +1,102 @@
+set nocompatible              " required
+filetype off                  " required
+
+set encoding=utf-8
+set number
+
+:highlight ExtraWhitespace ctermbg=red guibg=red
+
+" Show trailing whitespace:
+:match ExtraWhitespace /\s\+$/
+
+" Show trailing whitespace and spaces before a tab:
+:match ExtraWhitespace /\s\+$\| \+\ze\t/
+
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+
+" SimpylFold allows to inteligent folds instead of defaults
+Plugin 'tmhedberg/SimpylFold'
+
+" Functions intends compatible with PEP8
+Plugin 'vim-scripts/indentpython.vim'
+
+" Auto complete for Python
+Bundle 'Valloric/YouCompleteMe'
+
+" Syntax highlight
+Plugin 'vim-syntastic/syntastic'
+
+" Support for PEP8
+Plugin 'nvie/vim-flake8'
+
+" Color Schemes
+Plugin 'jnurmine/Zenburn'
+Plugin 'altercation/vim-colors-solarized'
+
+"File browsing
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+
+"Super Searching
+Plugin 'kien/ctrlp.vim'
+
+"Git integration
+Plugin 'tpope/vim-fugitive'
+
+"Powerline
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+let python_highlight_all=1
+syntax on
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+
+nnoremap <space> za
+
+au BufNewFile,BufRead *.py,*.pyw,*.c,*.h
+    \ set tabstop=4 |
+    \ set softtabstop=4 |
+    \ set shiftwidth=4 |
+    \ set textwidth=79 |
+    \ set expandtab |
+    \ set autoindent |
+    \ set fileformat=unix
+
+au BufNewFile,BufRead *.js, *.html, *.css
+    \ set tabstop=2
+    \ set softtabstop=2
+    \ set shiftwidth=2
+
+let g:ycm_autoclose_preview_window_after_completion=1
+map <C-b>  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+"python with virtualenv support
+py << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+  project_base_dir = os.environ['VIRTUAL_ENV']
+  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+  execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+if has('gui_running')
+  set background=dark
+  colorscheme solarized
+else
+  colorscheme zenburn
+endif
+
+call togglebg#map("<F5>")
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
