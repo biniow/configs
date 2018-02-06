@@ -37,6 +37,9 @@ Plugin 'nvie/vim-flake8'
 " Color Schemes
 Plugin 'jnurmine/Zenburn'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'Alvarocz/vim-northpole'
+Plugin 'hauleth/blame.vim'
+Plugin 'Badacadabra/vim-archery'
 
 "File browsing
 Plugin 'scrooloose/nerdtree'
@@ -82,7 +85,7 @@ let g:ycm_autoclose_preview_window_after_completion=1
 map <C-b>  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 "python with virtualenv support
-py << EOF
+py3 << EOF
 import os
 import sys
 if 'VIRTUAL_ENV' in os.environ:
@@ -92,11 +95,13 @@ if 'VIRTUAL_ENV' in os.environ:
 EOF
 
 if has('gui_running')
-  set background=dark
-  colorscheme solarized
+  colorscheme northpole
 else
   colorscheme zenburn
 endif
+
+let g:ycm_keep_logfiles = 1
+let g:ycm_log_level = 'debug'
 
 call togglebg#map("<F5>")
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
