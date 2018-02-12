@@ -1,0 +1,26 @@
+#!/bin/bash
+set -e
+
+export DISPLAY=:0
+export XAUTHORITY=/home/wojtek/.Xauthority
+
+HDMI_STATUS=$(</sys/class/drm/card0/card0-HDMI-A-1/status)  
+VGA_STATUS=$(</sys/class/drm/card0/card0-VGA-1/status)
+
+if [ "connected" == "${HDMI_STATUS}" ]; then  
+    xrandr > /dev/null
+    xrandr --output HDMI-1 --left-of LVDS-1 --auto --primary
+    xrandr --output VGA-1 --off
+    i3-msg "workspace 1:  "
+    i3-msg "move workspace to output left"
+elif [ "connected" == "${VGA_STATUS}" ]; then  
+    xrandr > /dev/null
+    xrandr --output VGA-1 --left-of LVDS-1 --auto --primary
+    xrandr --output HDMI-1 --off
+    i3-msg "workspace 1:  "
+    i3-msg "move workspace to output left"
+else  
+    xrandr --output HDMI-1 --off
+    xrandr --output VGA-1 --off
+    exit
+fi
