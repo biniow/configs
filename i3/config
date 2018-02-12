@@ -29,10 +29,6 @@ font pango:DejaVu Sans Mono 10
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# Configure border style
-new_window pixel 2
-new_float pixel 2
-
 # start a terminal
 bindsym $mod+Return exec gnome-terminal
 
@@ -90,8 +86,8 @@ bindsym $mod+a focus parent
 set $screenshot_area --no-startup-id gnome-screenshot -a
 set $screenshot --no-startup-id gnome-screenshot
 
-bindsym Print exec $screenshot_area
-bindsym Print+Shift exec $screenshot
+bindsym --release Print exec $screenshot_area
+bindsym --release Shift+Print exec $screenshot
 
 
 set $workspace1 "1:  "
@@ -170,7 +166,8 @@ client.urgent           $urgent-bg-color   $urgent-bg-color   $text-color       
 # finds out, if available)
 
 bar {
-        status_command i3blocks -c ~/.config/i3/i3status_config
+        status_command conky -c ~/.config/i3/i3conky_config
+	tray_output primary
 	colors {
 		background $bg-color
 	    	separator #757575
@@ -181,11 +178,9 @@ bar {
 	}
 }
 
-hide_edge_borders both
-
-#set $lockscript '/home/wojtek/.config/i3/lock.sh'
-#bindsym $mod+x exec $lockscript
-#bindsym $mod+Shift+s exec /home/wojtek/.config/i3/suspend.sh
+set $lockscript '/home/wojtek/.config/i3/scripts/lock.sh'
+bindsym $mod+l exec $lockscript
+bindsym $mod+Shift+s exec $lockscript && systemctl suspend
 
 
 # Sreen brightness controls
@@ -193,7 +188,7 @@ bindsym XF86MonBrightnessUp exec brightnessctl s +10%
 bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
 
 # Touchpad controls
-bindsym XF86TouchpadToggle exec ~/.config/i3/scripts/toggletouchpad.sh # toggle touchpad
+bindsym XF86TouchpadToggle exec ~/.config/i3/scripts/toggletouchpad.sh
 
 # Media player controls
 bindsym XF86AudioPlay exec playerctl play-pause
@@ -207,21 +202,20 @@ bindsym XF86AudioLowerVolume exec pulseaudio-ctl down
 bindsym XF86AudioMute exec pulseaudio-ctl mute
 
 assign [class="Google-chrome"] $workspace1
-#assign [class="Gnome-terminal"] $workspace2
+assign [class="Gnome-terminal"] $workspace2
 assign [class="Thunderbird"] $workspace9
 
-exec google-chrome-stable
-exec gnome-terminal
-exec thunderbird
+exec --no-startup-id google-chrome-stable
+exec --no-startup-id gnome-terminal
+exec --no-startup-id thunderbird
 
-
-#exec_always feh --bg-scale /home/wojtek/Pictures/wallpaper.jpg
+exec_always ~/.config/i3/scripts/set_wallpaper.sh
 
 bindsym $mod+Shift+greater move workspace to output right
 bindsym $mod+Shift+less move workspace to output left
 
 exec --no-startup-id nm-applet
-exec --no-startup-id pnmixer
+exec --no-startup-id blueman-applet
 exec --no-startup-id compton -f
 exec --no-startup-id xautolock -time 10 -locker $lockscript
 
