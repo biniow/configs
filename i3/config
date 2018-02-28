@@ -89,6 +89,8 @@ set $screenshot --no-startup-id gnome-screenshot
 bindsym --release Print exec $screenshot_area
 bindsym --release Shift+Print exec $screenshot
 
+bindsym $mod+Shift+p /usr/local/bin/display_manager
+bindsym $mod+Shift+k /usr/local/bin/set_polish_keyboard_layout
 
 set $workspace1 "1:  "
 set $workspace2 "2:  "
@@ -167,7 +169,7 @@ client.urgent           $urgent-bg-color   $urgent-bg-color   $text-color       
 
 bar {
         status_command conky -c ~/.config/i3/i3conky_config
-	tray_output primary
+	#tray_output primary
 	colors {
 		background $bg-color
 	    	separator #757575
@@ -209,19 +211,21 @@ exec --no-startup-id google-chrome-stable
 exec --no-startup-id gnome-terminal
 exec --no-startup-id thunderbird
 
-exec_always ~/.config/i3/scripts/set_wallpaper.sh
 
 bindsym $mod+Shift+greater move workspace to output right
 bindsym $mod+Shift+less move workspace to output left
 
 exec --no-startup-id nm-applet
+exec --no-startup-id volumeicon
 exec --no-startup-id blueman-applet
 exec --no-startup-id compton -f
 exec --no-startup-id xautolock -time 10 -locker $lockscript
 
 # Polish characters support
-exec setxkbmap -layout pl,us
-exec setxkbmap -option 'grp:alt_shift_toggle'
+exec --no-startup-id set_polish_keyboard_layout
 
 # Run display manager at startup
-exec --no-startup-id display_manager
+exec --no-startup-id /usr/local/bin/display_manager
+
+# set wallpapepr
+exec_always ~/.config/i3/scripts/set_wallpaper.sh
