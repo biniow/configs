@@ -40,6 +40,8 @@ override_utf8_locale no
 TEXT
 # Free space on /
  / ${fs_used /}(${fs_used_perc /}%) | \
+# Free space on /var
+ /var ${fs_used /var}(${fs_used_perc /var}%) | \
 # Free space on /home
  /home ${fs_used /home}(${fs_used_perc /home}%) | \
 # Ethernet status
@@ -50,5 +52,5 @@ ${if_up wlo1} ${addr wlo1} | ${endif}\
 CPU ${cpu cpu0}% ${freq_g 0}GHz ${exec sensors | grep -m 1 "Core 0"|awk '{print $3}'} | \
 # RAM in use
 RAM ${memperc}% | \
-  ${battery_percent BAT0}% | \
+ ${battery_percent BAT0}% | \
  ${time %a %d.%m.%y}  ${time %H:%M}

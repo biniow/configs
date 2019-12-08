@@ -30,7 +30,7 @@ font pango:DejaVu Sans Mono 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec termite
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -41,8 +41,7 @@ bindsym $mod+Shift+q kill
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
-bindsym $mod+Shift+d exec dmenu_run -i -nb '$bg-color' -nf '#FFFFFF' -sb '#FF9C00' -sf '#151617'
-bindsym $mod+d exec rofi -show combi -theme sidetab
+bindsym $mod+d exec dmenu_run -i -nb '$bg-color' -nf '#FFFFFF' -sb '#FF9C00' -sf '#151617'
 
 # focus window
 bindsym $mod+Left focus left
@@ -82,6 +81,9 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# translate
+bindsym $mod+x exec ~/bin/translate
+
 # Screenshoots
 set $screenshot_area --no-startup-id gnome-screenshot -a
 set $screenshot --no-startup-id gnome-screenshot
@@ -90,7 +92,6 @@ bindsym --release Print exec $screenshot_area
 bindsym --release Shift+Print exec $screenshot
 
 bindsym $mod+Shift+p /usr/local/bin/display_manager
-bindsym $mod+Shift+k /usr/local/bin/set_polish_keyboard_layout
 
 set $workspace1 "1:  "
 set $workspace2 "2:  "
@@ -186,8 +187,8 @@ bindsym $mod+Shift+s exec $lockscript && systemctl suspend
 
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec brightnessctl s +10%
-bindsym XF86MonBrightnessDown exec brightnessctl s 10%-
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
 # Touchpad controls
 bindsym XF86TouchpadToggle exec ~/.config/i3/scripts/toggletouchpad.sh
@@ -203,12 +204,12 @@ bindsym XF86AudioRaiseVolume exec pulseaudio-ctl up
 bindsym XF86AudioLowerVolume exec pulseaudio-ctl down
 bindsym XF86AudioMute exec pulseaudio-ctl mute
 
-assign [class="Google-chrome"] $workspace1
-assign [class="Gnome-terminal"] $workspace2
+assign [class="brave-browser"] $workspace1
+assign [class="Termite"] $workspace2
 assign [class="Thunderbird"] $workspace9
 
-exec --no-startup-id google-chrome-stable
-exec --no-startup-id gnome-terminal
+exec --no-startup-id brave 
+exec --no-startup-id termite
 exec --no-startup-id thunderbird
 
 
@@ -219,7 +220,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 exec --no-startup-id blueman-applet
 exec --no-startup-id compton -f
-exec --no-startup-id xautolock -time 10 -locker $lockscript
+exec --no-startup-id xautolock -time 5 -locker $lockscript
 
 # Polish characters support
 exec --no-startup-id set_polish_keyboard_layout
@@ -229,3 +230,6 @@ exec --no-startup-id /usr/local/bin/display_manager
 
 # set wallpapepr
 exec_always ~/.config/i3/scripts/set_wallpaper.sh
+
+# run notification manager
+exec --no-startup-id /usr/bin/dunst
