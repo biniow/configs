@@ -1,0 +1,6 @@
+#!/bin/bash
+IN="$(xsel -o)"
+OUT="$(curl -s "http://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=pl&dt=t&q=$(xsel -o | sed "s/[\"'<>]//g")" | tr '\n' ',' | sed -E 's/[]\[]//g' | awk -F'"' '{print $2, $(NF-1)}')"
+
+notify-send --icon=info "${IN}" "${OUT}"
+
