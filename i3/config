@@ -212,7 +212,6 @@ assign [class="Thunderbird"] $workspace9
 exec --no-startup-id brave 
 exec --no-startup-id termite
 exec --no-startup-id slack
-exec --no-startup-id thunderbird
 
 
 bindsym $mod+Shift+greater move workspace to output right
@@ -220,6 +219,7 @@ bindsym $mod+Shift+less move workspace to output left
 
 exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
+exec --no-startup-id cbatticon
 exec --no-startup-id blueman-applet
 exec --no-startup-id xautolock -time 5 -locker $lockscript
 
