@@ -205,11 +205,13 @@ bindsym XF86AudioLowerVolume exec pulseaudio-ctl down
 bindsym XF86AudioMute exec pulseaudio-ctl mute
 
 assign [class="brave-browser"] $workspace1
-assign [class="Termite"] $workspace2
+#assign [class="Termite"] $workspace2
+assign [class="[sS]lack"] $workspace5
 assign [class="Thunderbird"] $workspace9
 
 exec --no-startup-id brave 
 exec --no-startup-id termite
+exec --no-startup-id slack
 exec --no-startup-id thunderbird
 
 
@@ -219,17 +221,18 @@ bindsym $mod+Shift+less move workspace to output left
 exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 exec --no-startup-id blueman-applet
-exec --no-startup-id compton -f
 exec --no-startup-id xautolock -time 5 -locker $lockscript
 
-# Polish characters support
-exec --no-startup-id set_polish_keyboard_layout
-
 # Run display manager at startup
-exec --no-startup-id /usr/local/bin/display_manager
+#exec --no-startup-id /usr/local/bin/display_manager
 
 # set wallpapepr
 exec_always ~/.config/i3/scripts/set_wallpaper.sh
 
 # run notification manager
 exec --no-startup-id /usr/bin/dunst
+
+# fix save (file/as window) resolution
+for_window [class="^[bB]rave" title="^Save File$"] floating enable, resize set 1600 1200, move position center
+for_window [class="^[nN]m-openconnect-auth-dialog"] floating enable, resize set 1600 1200, move position center
+

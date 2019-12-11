@@ -1,0 +1,16 @@
+#!/bin/bash
+set -e
+
+export DISPLAY=:0
+export XAUTHORITY=/home/wojtek/.Xauthority
+
+DP1_STATUS=$(</sys/class/drm/card0-DP-1/status)
+
+if [ "connected" == "${DP1_STATUS}" ]; then
+    xrandr > /dev/null
+    xrandr --output DP1 --right-of eDP-1 --auto --primary
+    i3-msg "move workspace to output left"
+else
+    xrandr --output DP1 --off
+    exit
+fi

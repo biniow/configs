@@ -1,2 +1,2 @@
 #!/bin/bash
-i3lock -i /home/wojtek/Pictures/lock_screen.png -t
+i3lockmore --image-fill /home/wojtek/Pictures/lock_screen.png
