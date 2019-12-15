@@ -10,13 +10,19 @@ alias ll='ls -l'
 alias la='ls -la'
 alias grep='grep --color'
 
-PATH="${PATH}:~/bin"
+source ~/.atlas.aliases
+
+export npm_config_prefix=~/.node_modules
+
+PATH="${PATH}:~/bin:${npm_config_prefix}/node_modules/.bin"
+
+# Golang
+GOPATH="${HOME}/.golang"
 
 # Git
 GIT_PS1_SHOWDIRTYSTATE='y'
 GIT_PS1_SHOWSTASHSTATE='y'
 GIT_PS1_DESCRIBE_STYLE='contains'
-GIT_PS1_SHOWUPSTREAM='auto'
 
 source /usr/share/git/completion/git-prompt.sh
 
@@ -34,4 +40,3 @@ shopt -s autocd # autocd into directory
 shopt -s checkwinsize # fix for windows size
 
 archey3
-

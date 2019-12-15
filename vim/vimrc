@@ -3,6 +3,7 @@ filetype off                  " required
 
 set encoding=utf-8
 set number
+set mouse=v
 
 :highlight ExtraWhitespace ctermbg=red guibg=red
 
