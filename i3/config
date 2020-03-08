@@ -91,8 +91,6 @@ set $screenshot --no-startup-id gnome-screenshot
 bindsym --release Print exec $screenshot_area
 bindsym --release Shift+Print exec $screenshot
 
-bindsym $mod+x exec /bin/translate
-
 bindsym $mod+Shift+p /usr/local/bin/display_manager
 
 set $workspace1 "1: "
@@ -236,3 +234,7 @@ exec_always ~/.config/i3/scripts/set_wallpaper.sh
 
 # run notification manager
 exec --no-startup-id /usr/bin/dunst
+
+# rotate
+bindsym $mod+Shift+l exec ~/.config/i3/scripts/rotate_left
+bindsym $mod+Shift+n exec ~/.config/i3/scripts/rotate_normal
