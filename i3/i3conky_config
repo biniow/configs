@@ -43,7 +43,7 @@ TEXT
 # Free space on /var
  /var ${fs_used /var}(${fs_used_perc /var}%) | \
 # Free space on /home
- /home ${fs_used /home}(${fs_used_perc /home}%) | \
+/home ${fs_used /home}(${fs_used_perc /home}%) | \
 # Ethernet status
 ${if_up eth0}eth0 ${addr eth0} | ${endif}\
 # Wireless status

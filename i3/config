@@ -17,7 +17,7 @@ set $mod Mod4
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 10
+font pango:DejaVu Sans Mono 9
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -91,21 +91,23 @@ set $screenshot --no-startup-id gnome-screenshot
 bindsym --release Print exec $screenshot_area
 bindsym --release Shift+Print exec $screenshot
 
+bindsym $mod+x exec /bin/translate
+
 bindsym $mod+Shift+p /usr/local/bin/display_manager
 
-set $workspace1 "1:  "
-set $workspace2 "2:  "
-set $workspace3 "3:  "
-set $workspace4 "4:  "
-set $workspace5 "5:  "
-set $workspace6 "6:  "
-set $workspace7 "7:  "
-set $workspace8 "8:  "
-set $workspace9 "9:  "
-set $workspace10 "10:  "
+set $workspace1 "1: "
+set $workspace2 "2: "
+set $workspace3 "3: "
+set $workspace4 "4: "
+set $workspace5 "5: "
+set $workspace6 "6: "
+set $workspace7 "7: "
+set $workspace8 "8: "
+set $workspace9 "9: "
+set $workspace10 "10: "
 
 # switch to workspace
-bindsym $mod+1 workspace $workspace1 
+bindsym $mod+1 workspace $workspace1
 bindsym $mod+2 workspace $workspace2
 bindsym $mod+3 workspace $workspace3
 bindsym $mod+4 workspace $workspace4
@@ -206,9 +208,10 @@ bindsym XF86AudioMute exec pulseaudio-ctl mute
 
 assign [class="brave-browser"] $workspace1
 assign [class="Termite"] $workspace2
+assign [class="Vlc"] $workspace8
 assign [class="Thunderbird"] $workspace9
 
-exec --no-startup-id brave 
+exec --no-startup-id brave
 exec --no-startup-id termite
 exec --no-startup-id thunderbird
 
@@ -218,7 +221,7 @@ bindsym $mod+Shift+less move workspace to output left
 
 exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
-exec --no-startup-id blueman-applet
+#exec --no-startup-id blueman-applet
 exec --no-startup-id compton -f
 exec --no-startup-id xautolock -time 5 -locker $lockscript
 
