@@ -91,7 +91,7 @@ set $screenshot --no-startup-id gnome-screenshot
 bindsym --release Print exec $screenshot_area
 bindsym --release Shift+Print exec $screenshot
 
-bindsym $mod+Shift+p /usr/local/bin/display_manager
+bindsym $mod+Shift+p exec /home/wojtek/configs/scripts/display_manager
 
 set $workspace1 "1:  "
 set $workspace2 "2:  "
@@ -170,7 +170,7 @@ client.urgent           $urgent-bg-color   $urgent-bg-color   $text-color       
 
 bar {
         status_command conky -c ~/.config/i3/i3conky_config
-	#tray_output primary
+	tray_output primary
 	colors {
 		background $bg-color
 	    	separator #757575
@@ -208,7 +208,7 @@ bindsym XF86AudioMute exec pulseaudio-ctl mute
 bindsym Print exec scrot '%Y-%m-%d-%s_screenshot_$wx$h.jpg' -e 'mv $f ~/Pictures/screen_shots/'
 bindsym Control+Print exec gnome-screenshot -i
 
-assign [class="brave-browser"] $workspace1
+assign [class="[bB]rave-browser"] $workspace1
 #assign [class="Termite"] $workspace2
 assign [class="[sS]lack"] $workspace5
 assign [class="[tT]hunderbird"] $workspace9
@@ -226,10 +226,11 @@ exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 exec --no-startup-id cbatticon
 exec --no-startup-id blueman-applet
-exec --no-startup-id xautolock -time 5 -locker $lockscript
+exec --no-startup-id xidlehook --not-when-fullscreen --timer 600 'i3lockmore --image-fill /home/wojtek/Pictures/lock_screen.png' ''
+#exec --no-startup-id xautolock -time 10 -locker $lockscript
 
 # Run display manager at startup
-#exec --no-startup-id /usr/local/bin/display_manager
+exec --no-startup-id /home/wojtek/configs/scripts/display_manager
 
 # set wallpapepr
 exec_always ~/.config/i3/scripts/set_wallpaper.sh

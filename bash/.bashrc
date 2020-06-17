@@ -9,12 +9,16 @@ alias ls='ls --color=auto'
 alias ll='ls -l'
 alias la='ls -la'
 alias grep='grep --color'
+alias yaml2js="python -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)'"
 
 source ~/.atlas.aliases
 
-export npm_config_prefix=~/.node_modules
+unset npm_config_prefix
 
-PATH="${PATH}:~/bin:${npm_config_prefix}/node_modules/.bin"
+#export npm_config_prefix=~/.node_modules # replaced by nvm
+
+#PATH="${PATH}:~/bin:${npm_config_prefix}/node_modules/.bin" # due to replaced by 
+PATH="${PATH}:~/bin"
 
 # Golang
 GOPATH="${HOME}/.golang"
@@ -38,5 +42,17 @@ source /usr/share/doc/pkgfile/command-not-found.bash
 
 shopt -s autocd # autocd into directory
 shopt -s checkwinsize # fix for windows size
+
+export HISTCONTROL=ignorespace
+
+# make larger fonts in zoom
+export QT_SCALE_FACTOR=2
+
+
+nodejs-env () {
+	source ~/.nvm/nvm.sh
+	nvm use stable >> /dev/null
+	echo "Nvm config has been applied. You can use node and npm in your shell"
+}
 
 archey3

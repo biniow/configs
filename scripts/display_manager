@@ -5,12 +5,27 @@ export DISPLAY=:0
 export XAUTHORITY=/home/wojtek/.Xauthority
 
 DP1_STATUS=$(</sys/class/drm/card0-DP-1/status)
+DP3_STATUS=$(</sys/class/drm/card0-DP-3/status)
+
+echo $DP1_STATUS
+echo $DP3_STATUS
 
 if [ "connected" == "${DP1_STATUS}" ]; then
     xrandr > /dev/null
     xrandr --output DP1 --left-of eDP1 --auto --primary
     i3-msg "move workspace to output left"
+elif [ "connected" == "${DP3_STATUS}" ]; then
+    xrandr > /dev/null
+    xrandr --output eDP1 --auto
+    xrandr --output DP3 --left-of eDP1 --auto --primary 
+    xrandr --output DP3 --pos 0x0 --scale 1.8
+    #xrandr --output DP3 --pos 0x0 --scale 1.4
+    xrandr --output eDP1 --pos 4992x0
+    #xrandr --output eDP1 --pos 2688x0
+    i3-msg "move workspace to output left"
 else
     xrandr --output DP1 --off
+    xrandr --output DP3 --off
+    xrandr --output eDP1 --auto --primary
     exit
 fi
