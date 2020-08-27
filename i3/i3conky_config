@@ -52,5 +52,5 @@ ${if_up wlo1} ${addr wlo1} | ${endif}\
 CPU ${cpu cpu0}% ${freq_g 0}GHz ${exec sensors | grep -m 1 "Core 0"|awk '{print $3}'} | \
 # RAM in use
 RAM ${memperc}% | \
- ${battery_percent BAT0}% | \
+${if_match $battery_percent < 10} ${else}${if_match $battery_percent <= 25} ${else}${if_match $battery_percent <= 50} ${else}${if_match $battery_percent <= 75} ${else} ${endif}${endif}${endif}${endif}${battery_percent BAT0}% | \
  ${time %a %d.%m.%y}  ${time %H:%M}

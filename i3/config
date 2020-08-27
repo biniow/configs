@@ -91,7 +91,7 @@ set $screenshot --no-startup-id gnome-screenshot
 bindsym --release Print exec $screenshot_area
 bindsym --release Shift+Print exec $screenshot
 
-bindsym $mod+Shift+p /usr/local/bin/display_manager
+bindsym $mod+Shift+p exec /usr/local/bin/display_manager
 
 set $workspace1 "1: "
 set $workspace2 "2: "
@@ -205,7 +205,7 @@ bindsym XF86AudioLowerVolume exec pulseaudio-ctl down
 bindsym XF86AudioMute exec pulseaudio-ctl mute
 
 assign [class="brave-browser"] $workspace1
-assign [class="Termite"] $workspace2
+#assign [class="Termite"] $workspace2
 assign [class="Vlc"] $workspace8
 assign [class="Thunderbird"] $workspace9
 
@@ -221,7 +221,9 @@ exec --no-startup-id nm-applet
 exec --no-startup-id volumeicon
 #exec --no-startup-id blueman-applet
 exec --no-startup-id compton -f
-exec --no-startup-id xautolock -time 5 -locker $lockscript
+#exec --no-startup-id xautolock -time 60 -locker $lockscript
+exec --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --timer 300 'i3lock -i /home/wojtek/Pictures/lock_screen.png -t' ''
+
 
 # Polish characters support
 exec --no-startup-id set_polish_keyboard_layout

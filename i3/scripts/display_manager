@@ -4,8 +4,8 @@ set -e
 export DISPLAY=:0
 export XAUTHORITY=/home/wojtek/.Xauthority
 
-HDMI_STATUS=$(</sys/class/drm/card0/card0-HDMI-A-1/status)  
-VGA_STATUS=$(</sys/class/drm/card0/card0-VGA-1/status)
+HDMI_STATUS=$(</sys/class/drm/card0-HDMI-A-1/status)  
+VGA_STATUS=$(</sys/class/drm/card0-VGA-1/status)
 
 if [ "connected" == "${HDMI_STATUS}" ]; then  
     xrandr > /dev/null

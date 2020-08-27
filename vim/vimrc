@@ -95,3 +95,7 @@ let g:ycm_log_level = 'debug'
 
 call togglebg#map("<F5>")
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+" SML language support
+Bundle 'javier-lopez/sml.vim'
+
