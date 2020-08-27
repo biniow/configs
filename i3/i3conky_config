@@ -1,56 +1,52 @@
-## No output to X <yes/no>
-out_to_x no
+conky.config = {
+-- No output to X <yes/no>
+out_to_x = false,
 
-## Create own window to draw <yes/no>
-own_window no
+-- Create own window to draw <yes/no>
+own_window = false,
 
-## Print everything to console?
-out_to_console yes
+-- Print everything to console?
+out_to_console = true,
 
-## Use double buffering (reduces flicker, not needed for console output)
-double_buffer no
+-- Use double buffering (reduces flicker, not needed for console output)
+double_buffer = false,
 
-## Set to yes if you want Conky to be forked in the background
-background no
+-- Set to yes if you want Conky to be forked in the background
+background = false,
 
-## Update interval in seconds
-update_interval 2.0
+-- Update interval in seconds
+update_interval = 2.0,
 
-## This is the number of times Conky will update before quitting.
-## Set to zero to run forever.
-total_run_times 0
+-- This is the number of times Conky will update before quitting.
+-- Set to zero to run forever.
+total_run_times = 0,
 
-## Shortens units to a single character (kiB->k, GiB->G, etc.). Default is off.
-short_units yes
+-- Shortens units to a single character (kiB->k, GiB->G, etc.). Default is off.
+short_units = true,
 
-## How strict should if_up be when testing an interface for being up?
-## The value is one of up, link or address, to check for the interface
-## being solely up, being up and having link or being up, having link
-## and an assigned IP address. 
-if_up_strictness address
+-- How strict should if_up be when testing an interface for being up?
+-- The value is one of up, link or address, to check for the interface
+-- being solely up, being up and having link or being up, having link
+-- and an assigned IP address.
+if_up_strictness = "address",
 
-## Add spaces to keep things from moving about?  This only affects certain objects.
-## use_spacer should have an argument of left, right, or none
-use_spacer left
+-- Add spaces to keep things from moving about?  This only affects certain objects.
+-- use_spacer should have an argument of left, right, or none
+use_spacer = "left",
 
-## Force UTF8? note that UTF8 support required XFT
-override_utf8_locale no
+-- Force UTF8? note that UTF8 support required XFT
+override_utf8_locale = false
+}
+-- Stuff after 'TEXT' will be formatted on screen
 
-## Stuff after 'TEXT' will be formatted on screen
-TEXT
-# Free space on /
+conky.text = [[
  / ${fs_used /}(${fs_used_perc /}%) | \
-# Free space on /var
  /var ${fs_used /var}(${fs_used_perc /var}%) | \
-# Free space on /home
-/home ${fs_used /home}(${fs_used_perc /home}%) | \
-# Ethernet status
+ /home ${fs_used /home}(${fs_used_perc /home}%) | \
 ${if_up eth0}eth0 ${addr eth0} | ${endif}\
-# Wireless status
 ${if_up wlo1} ${addr wlo1} | ${endif}\
-# CPU stats
 CPU ${cpu cpu0}% ${freq_g 0}GHz ${exec sensors | grep -m 1 "Core 0"|awk '{print $3}'} | \
-# RAM in use
 RAM ${memperc}% | \
-${if_match $battery_percent < 10} ${else}${if_match $battery_percent <= 25} ${else}${if_match $battery_percent <= 50} ${else}${if_match $battery_percent <= 75} ${else} ${endif}${endif}${endif}${endif}${battery_percent BAT0}% | \
+${if_match $battery_percent < 10} ${else}${if_match $battery_percent <= 25} ${else}${if_match $battery_percent <= 50} ${else}${if_match $battery_percent <= 90} ${else} ${endif}${endif}${endif}${endif}${battery_percent BAT0}% | \
  ${time %a %d.%m.%y}  ${time %H:%M}
+]]
